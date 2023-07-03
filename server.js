@@ -53,6 +53,13 @@ app.use(function (req, res, next) {
   next();
 });
 
+if(process.env.NODE_ENV=='production')
+{
+  const path = require('path')
+  app.get('/',(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+  })
+}
 // Routes
 app.use("/api/users", users);
 app.use("/api/messages", messages);
